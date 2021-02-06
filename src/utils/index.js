@@ -1,5 +1,4 @@
 import Scale from './Scale'
 
-export {
-  Scale
-}
+export * from './ShowMessage'
+export { Scale }
