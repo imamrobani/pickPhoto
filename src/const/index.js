@@ -1,4 +1,9 @@
 import Colors from './Colors'
 import Fonts from './Fonts'
+import Networks from './Networks'
 
-export { Colors, Fonts }
+export {
+  Colors,
+  Fonts,
+  Networks
+}
