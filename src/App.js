@@ -2,8 +2,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import 'react-native-gesture-handler';
 import Router from './router';
-// import { Provider, useSelector } from 'react-redux'
-// import store from './redux/store';
+import { Provider, useSelector } from 'react-redux'
+import store from './redux/store';
 // import FlashMessage from "react-native-flash-message"
 // import { Loading } from './components';
 
@@ -20,9 +20,9 @@ const MainApp = () => {
 
 const App = () => {
   return (
-    // <Provider store={store}>
-    <MainApp />
-    // </Provider>
+    <Provider store={store}>
+      <MainApp />
+    </Provider>
   );
 };
 
