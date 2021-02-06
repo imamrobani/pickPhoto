@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import { listPhotoReducer } from './listPhoto'
+import { globalReducer } from './global'
 
 const reducer = combineReducers({
-  listPhotoReducer
+  listPhotoReducer,
+  globalReducer
 })
 
 export default reducer
