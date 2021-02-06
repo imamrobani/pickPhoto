@@ -3,16 +3,17 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import { Dummy5 } from '../../assets'
 import { Colors, Fonts } from '../../const'
 
-const ItemListImage = () => {
+const ItemListImage = ({ image = Dummy5, latitude, longitude, time }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={Dummy5}
+        source={image}
         style={styles.image}
       />
       <View style={styles.content}>
-        <Text style={styles.title}>Latittude: -6.89868</Text>
-        <Text style={styles.title}>Longitude: 107.64278</Text>
+        <Text style={styles.title}>Latittude: {latitude}</Text>
+        <Text style={styles.title}>Longitude: {longitude}</Text>
+        <Text style={styles.title}>Time: {time}</Text>
       </View>
     </View>
   )
