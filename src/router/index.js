@@ -1,11 +1,16 @@
 import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Home, Profile, SplashScreen } from '../screens'
+import { Home, ListPhoto, Profile, SplashScreen } from '../screens'
 import { BottomNavigator } from '../components'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
+
+const options = {
+  gestureEnabled: true,
+  ...TransitionPresets.ScaleFromCenterAndroid
+}
 
 const MainApp = () => {
   return (
@@ -21,16 +26,16 @@ const Router = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        cardStyle: {
-          backgroundColor: 'white'
-        }
+        // cardStyle: {
+        //   backgroundColor: 'white'
+        // }
       }}
     >
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
-      <Stack.Screen name="MainApp" component={MainApp} />
+      <Stack.Screen name="MainApp" component={MainApp} options={options} />
+      <Stack.Screen name="ListPhoto" component={ListPhoto} options={options} />
     </Stack.Navigator>
   )
 }
 
 export default Router
-

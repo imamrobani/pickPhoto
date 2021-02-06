@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { ButtonCamera, HomeProfile, ImageCard } from '../../components'
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <HomeProfile />
@@ -10,6 +10,7 @@ const Home = () => {
         <ImageCard
           latitude='-6.89868'
           longitude='107.64278'
+          onPress={() => navigation.navigate('ListPhoto')}
         />
       </View>
       <View style={styles.buttonContainer}>
