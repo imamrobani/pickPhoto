@@ -8,7 +8,8 @@ const Colors = {
   brightOrange: '#ff5c00',
   white: '#ffffff',
   dark: '#1D1D42',
-  seafoamBlue: '#6fcf97'
+  darkTwo: '#141432',
+  seafoamBlue: '#6fcf97',
 }
 
 export default Colors
