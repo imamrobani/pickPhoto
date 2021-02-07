@@ -12,6 +12,11 @@ const options = {
   ...TransitionPresets.ScaleFromCenterAndroid
 }
 
+const optionsiOS = {
+  gestureEnabled: true,
+  ...TransitionPresets.SlideFromRightIOS
+}
+
 const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
@@ -32,7 +37,7 @@ const Router = () => {
       }}
     >
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
-      <Stack.Screen name="MainApp" component={MainApp} options={options} />
+      <Stack.Screen name="MainApp" component={MainApp} options={optionsiOS} />
       <Stack.Screen name="ListPhoto" component={ListPhoto} options={options} />
     </Stack.Navigator>
   )

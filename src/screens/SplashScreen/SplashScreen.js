@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Logo } from '../../assets';
-import { Colors } from '../../const';
+import { Colors, Fonts } from '../../const';
 
 const SplashScreen = ({ navigation }) => {
   useEffect(() => {
@@ -12,6 +12,8 @@ const SplashScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Logo />
+      <View style={{ height: 38 }} />
+      <Text style={styles.title}>pickPhotos</Text>
     </View>
   )
 }
@@ -20,9 +22,10 @@ export default SplashScreen
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.seafoamBlue,
+    backgroundColor: Colors.topaz,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+  title: { fontSize: 32, color: Colors.dark, fontFamily: Fonts.POPPINS_MEDIUM }
 })
