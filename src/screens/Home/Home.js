@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
 import { ButtonCamera, HomeProfile, ImageCard } from '../../components'
 import useHome from '../../hooks/useHome'
 import firebase from 'react-native-firebase'
@@ -12,17 +12,19 @@ const Home = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <HomeProfile />
-      <View style={styles.cardContainer}>
-        <ImageCard
-          image={{ uri: lastImage.file }}
-          latitude={lastImage.latitude}
-          longitude={lastImage.longitude}
-          onPress={() => navigation.navigate('ListPhoto')}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <ButtonCamera onPress={addPhoto} />
-      </View>
+      <ScrollView>
+        <View style={styles.cardContainer}>
+          <ImageCard
+            image={{ uri: lastImage.file }}
+            latitude={lastImage.latitude}
+            longitude={lastImage.longitude}
+            onPress={() => navigation.navigate('ListPhoto')}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <ButtonCamera onPress={addPhoto} />
+        </View>
+      </ScrollView>
     </View>
   )
 }
