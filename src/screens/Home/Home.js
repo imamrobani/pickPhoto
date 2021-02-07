@@ -19,31 +19,6 @@ const Home = ({ navigation }) => {
   useEffect(() => {
     dispatch(getListPhotos())
     requestLocationPermission()
-  }, [])
-
-  useEffect(() => {
-    Geolocation.getCurrentPosition(position => {
-      const currentLongitude = JSON.stringify(position.coords.longitude)
-      const currentLatitude = JSON.stringify(position.coords.latitude)
-      setPosition({
-        latitude: currentLatitude,
-        longitude: currentLongitude
-      })
-    },
-      error => console.log('errorCurrent: ', error.message),
-      { enableHighAccuracy: false, timeout: 20000 }
-    );
-
-    const watchID = Geolocation.watchPosition(position => {
-      const currentLongitude = JSON.stringify(position.coords.longitude)
-      const currentLatitude = JSON.stringify(position.coords.latitude)
-      setPosition({
-        latitude: currentLatitude,
-        longitude: currentLongitude
-      })
-    },
-      error => console.log('errorWatch: ', error.message)
-    )
 
     return () => Geolocation.clearWatch(watchID)
   }, [])
@@ -62,6 +37,8 @@ const Home = ({ navigation }) => {
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         showMessage('You can use location', 'success')
+        callLocation()
+        watchID()
       } else {
         showMessage('Location permission denied')
       }
@@ -70,11 +47,41 @@ const Home = ({ navigation }) => {
     }
   };
 
+  const callLocation = () => {
+    Geolocation.getCurrentPosition(position => {
+      const currentLongitude = JSON.stringify(position.coords.longitude)
+      const currentLatitude = JSON.stringify(position.coords.latitude)
+      console.log('currentLatitude: ', currentLatitude)
+      console.log('currentLongitude: ', currentLongitude)
+      setPosition({
+        latitude: currentLatitude,
+        longitude: currentLongitude
+      })
+    },
+      error => console.log('errorCurrent: ', error.message),
+      { enableHighAccuracy: false, timeout: 20000 }
+    );
+  }
+
+  const watchID = () => {
+    Geolocation.watchPosition(position => {
+      const currentLongitude = JSON.stringify(position.coords.longitude)
+      const currentLatitude = JSON.stringify(position.coords.latitude)
+      setPosition({
+        latitude: currentLatitude,
+        longitude: currentLongitude
+      })
+    },
+      error => console.log('errorWatch: ', error.message)
+    )
+  }
+
   const addPhoto = () => {
+    callLocation()
     launchCamera({
-      quality: 0.7,
-      maxWidth: Scale(300),
-      maxHeight: Scale(300)
+      quality: 1,
+      maxWidth: 640,
+      maxHeight: 480
     }, res => {
       // console.log('res: ', res)
       if (res.didCancel || res.errorCode) {
@@ -92,8 +99,8 @@ const Home = ({ navigation }) => {
         formData.append('longitude', position.longitude)
         formData.append('fcm_token', '')
 
+        // console.log('form: ', formData)
         dispatch(uploadPhoto(formData))
-        dispatch(getListPhotos())
       }
     })
   }

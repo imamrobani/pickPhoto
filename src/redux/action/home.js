@@ -2,6 +2,7 @@ import axios from "axios"
 import { Networks } from "../../const"
 import { showMessage } from "../../utils"
 import { setLoading } from "./global"
+import { getListPhotos } from "./listPhoto"
 
 export const uploadPhoto = (dataForm) => (dispatch) => {
   dispatch(setLoading(true))
@@ -15,6 +16,7 @@ export const uploadPhoto = (dataForm) => (dispatch) => {
     dispatch(setLoading(false))
     showMessage(res.data.message, isStatus && 'success')
     dispatch({ type: 'SET_UPLOAD', value: res.data.data })
+    dispatch(getListPhotos())
   }).catch(err => {
     console.log('err: ', err.response)
     dispatch(setLoading(false))
