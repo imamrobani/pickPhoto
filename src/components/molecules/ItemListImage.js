@@ -1,21 +1,49 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity, LayoutAnimation, NativeModules } from 'react-native'
 import { Dummy5 } from '../../assets'
 import { Colors, Fonts } from '../../const'
+import { Scale } from '../../utils'
 
 const ItemListImage = ({ image = Dummy5, latitude, longitude, time }) => {
+  const { UIManager } = NativeModules
+  UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true)
+
+  const [height, setHeight] = useState(100)
+  const [width, setWidth] = useState(100)
+  const [flexDirection, setFlexdirection] = useState('row')
+  const [isExpand, setIsExpand] = useState(false)
+
+  const onDetail = () => {
+
+    if (isExpand) {
+      LayoutAnimation.spring();
+      setHeight(100)
+      setWidth(100)
+      setFlexdirection('row')
+    } else {
+      LayoutAnimation.spring();
+      setHeight(270)
+      setWidth(270)
+      setFlexdirection('column')
+    }
+    setIsExpand(!isExpand)
+  }
+
   return (
-    <View style={styles.container}>
-      <Image
-        source={image}
-        style={styles.image}
-      />
-      <View style={styles.content}>
-        <Text style={styles.title}>Latittude: {latitude}</Text>
-        <Text style={styles.title}>Longitude: {longitude}</Text>
-        <Text style={styles.title}>Time: {time}</Text>
+    <TouchableOpacity activeOpacity={0.7} onPress={onDetail}>
+      <View style={[styles.container, { flexDirection }]}>
+        <Image
+          source={image}
+          style={[styles.image, { height, width }]}
+        />
+        <View style={styles.content}>
+          <Text style={styles.title}>Latittude: {latitude}</Text>
+          <Text style={styles.title}>Longitude: {longitude}</Text>
+          <Text style={styles.title}>Time: {time}</Text>
+          <View style={styles.line} />
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -30,7 +58,6 @@ const styles = StyleSheet.create({
     padding: 16,
     marginHorizontal: 24,
     marginVertical: 16
-
   },
   image: {
     width: 100,
@@ -42,6 +69,16 @@ const styles = StyleSheet.create({
   content: { flex: 1 },
   title: {
     fontFamily: Fonts.POPPINS_REGULAR,
-    color: Colors.dark
+    color: Colors.dark,
+    fontSize: Scale(12),
+    textAlign: 'center'
   },
+  line: {
+    backgroundColor: '#d8d8d8',
+    height: 3,
+    marginTop: 16,
+    width: 30,
+    alignSelf: 'center',
+    borderRadius: 30 / 2
+  }
 })

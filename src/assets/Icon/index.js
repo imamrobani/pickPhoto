@@ -6,8 +6,6 @@ import IcCamera from './ic-camera.svg'
 import IcHomeOff from './ic-home-off.svg'
 import IcHomeOn from './ic-home-on.svg'
 import IcNext from './ic-next.svg'
-import IcOrderOff from './ic-order-off.svg'
-import IcOrderOn from './ic-order-on.svg'
 import IcProfileOff from './ic-profile-off.svg'
 import IcProfileOn from './ic-profile-on.svg'
 import IcStarOff from './ic-star-off.svg'
@@ -18,8 +16,6 @@ export {
   IcBackWhite,
   IcHomeOff,
   IcHomeOn,
-  IcOrderOff,
-  IcOrderOn,
   IcProfileOff,
   IcProfileOn,
   IcStarOn,
