@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
   },
   content: { padding: 12 },
   text: {
-    fontSize: Scale(16),
     fontFamily: Fonts.POPPINS_REGULAR,
     color: 'black'
   },
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
     marginVertical: 4
   },
   textMore: {
-    fontSize: Scale(15),
+    fontSize: Scale(14),
     fontFamily: Fonts.POPPINS_MEDIUM,
     color: Colors.dark
   }
