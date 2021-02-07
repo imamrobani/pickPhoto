@@ -28,7 +28,7 @@ export default () => {
         .setData(notification.data)
         .android.setChannelId('channelId') // e.g. the id you chose above
         .android.setSmallIcon('ic_launcher') // create this icon in Android Studio
-        .android.setColor('#d9435e') // you can set a color here
+        .android.setColor('#1ABC9C') // you can set a color here
         .android.setAutoCancel(true) // Njay bisa juga ini buat hapus nya ternyata
       //.android.setPriority(firebase.notifications.Android.Priority.High)
 
@@ -38,7 +38,7 @@ export default () => {
       firebase.notifications().removeDeliveredNotification(notification.notificationId)
 
       // this.props.onUnreadMessage(this.state.token)
-      console.log('notification ', notification)
+      // console.log('notification ', notification)
     })
 
 
@@ -53,14 +53,14 @@ export default () => {
     if (notificationOpen) {
       // Get information about the notification that was opened
       const { title, body } = notificationOpen.notification
-      console.log('getInitialNotification.notification', notificationOpen.notification)
+      // console.log('getInitialNotification.notification', notificationOpen.notification)
       const notification = notificationOpen.notification
 
     }
 
     /*Triggered for data only payload in foreground */
     const messageListener = await firebase.messaging().onMessage((message) => {
-      console.log('crot', message)
+      // console.log('crot', message)
     })
   }
 

@@ -11,14 +11,12 @@ export const uploadPhoto = (dataForm) => (dispatch) => {
       'Content-Type': 'multipart/form-data'
     }
   }).then(res => {
-    console.log('res', res.data)
     const isStatus = res.data.status
     dispatch(setLoading(false))
     showMessage(res.data.message, isStatus && 'success')
     dispatch({ type: 'SET_UPLOAD', value: res.data.data })
     dispatch(getListPhotos())
   }).catch(err => {
-    console.log('err: ', err.response)
     dispatch(setLoading(false))
     showMessage(err.response.message)
   })
