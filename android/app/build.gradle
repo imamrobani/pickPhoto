@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-
+apply plugin: 'com.google.gms.google-services'
 import com.android.build.OutputFile
 
 /**
@@ -192,6 +192,13 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    implementation(project(':react-native-firebase')) {
+			transitive = false
+	}
+	implementation "com.google.android.gms:play-services-base:16.1.0"
+	implementation "com.google.firebase:firebase-core:16.0.9"
+	implementation "com.google.firebase:firebase-messaging:19.0.1"
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

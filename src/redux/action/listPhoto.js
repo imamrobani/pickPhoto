@@ -12,6 +12,6 @@ export const getListPhotos = () => (dispatch) => {
     })
     .catch(err => {
       dispatch(setLoading(false))
-      console.log('err getList: ', err)
+      // console.log('err getList: ', err)
     })
 }

@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import Geolocation from '@react-native-community/geolocation'
 import { launchCamera } from 'react-native-image-picker'
 import { getListPhotos } from '../redux/action/listPhoto'
-import { showMessage } from '../utils'
+import { getData, showMessage } from '../utils'
 import { uploadPhoto } from '../redux/action/home'
 
 export default () => {
+  const [fcm, setFcm] = useState('')
   const [position, setPosition] = useState({
     latitude: '',
     longitude: ''
@@ -16,6 +17,10 @@ export default () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    getData('fcm_token').then(resFcm => {
+      // console.log('dasdadsa :', resFcm.value)
+      setFcm(resFcm.value)
+    })
     dispatch(getListPhotos())
     requestLocationPermission()
 
@@ -50,8 +55,8 @@ export default () => {
     Geolocation.getCurrentPosition(position => {
       const currentLongitude = JSON.stringify(position.coords.longitude)
       const currentLatitude = JSON.stringify(position.coords.latitude)
-      console.log('currentLatitude: ', currentLatitude)
-      console.log('currentLongitude: ', currentLongitude)
+      // console.log('currentLatitude: ', currentLatitude)
+      // console.log('currentLongitude: ', currentLongitude)
       setPosition({
         latitude: currentLatitude,
         longitude: currentLongitude
@@ -96,7 +101,7 @@ export default () => {
         formData.append('file', dataImage)
         formData.append('latitude', position.latitude)
         formData.append('longitude', position.longitude)
-        formData.append('fcm_token', '')
+        formData.append('fcm_token', fcm)
 
         // console.log('form: ', formData)
         dispatch(uploadPhoto(formData))
