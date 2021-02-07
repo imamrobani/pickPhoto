@@ -2,19 +2,22 @@ import Geolocation from '@react-native-community/geolocation'
 import React, { useEffect, useState } from 'react'
 import { PermissionsAndroid, StyleSheet, View } from 'react-native'
 import { launchCamera } from 'react-native-image-picker'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ButtonCamera, HomeProfile, ImageCard } from '../../components'
 import { uploadPhoto } from '../../redux/action/home'
-import { showMessage } from '../../utils'
+import { Scale, showMessage } from '../../utils'
+import { getListPhotos } from '../../redux/action/listPhoto'
 
 const Home = ({ navigation }) => {
   const [position, setPosition] = useState({
     latitude: '',
     longitude: ''
   })
+  const { lastImage } = useSelector(state => state.listPhotoReducer)
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(getListPhotos())
     requestLocationPermission()
   }, [])
 
@@ -69,9 +72,9 @@ const Home = ({ navigation }) => {
 
   const addPhoto = () => {
     launchCamera({
-      quality: 0.5,
-      maxWidth: 200,
-      maxHeight: 200
+      quality: 0.7,
+      maxWidth: Scale(300),
+      maxHeight: Scale(300)
     }, res => {
       // console.log('res: ', res)
       if (res.didCancel || res.errorCode) {
@@ -90,6 +93,7 @@ const Home = ({ navigation }) => {
         formData.append('fcm_token', '')
 
         dispatch(uploadPhoto(formData))
+        dispatch(getListPhotos())
       }
     })
   }
@@ -99,8 +103,9 @@ const Home = ({ navigation }) => {
       <HomeProfile />
       <View style={styles.cardContainer}>
         <ImageCard
-          latitude='-6.89868'
-          longitude='107.64278'
+          image={{ uri: lastImage.file }}
+          latitude={lastImage.latitude}
+          longitude={lastImage.longitude}
           onPress={() => navigation.navigate('ListPhoto')}
         />
       </View>

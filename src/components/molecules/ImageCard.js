@@ -1,12 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import { Dummy1, Dummy2, Dummy3, Dummy4, Dummy5, IcBack, IcNext } from '../../assets'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dummy5, IcNext } from '../../assets'
 import { Colors, Fonts } from '../../const'
 import { Scale } from '../../utils'
 
 const ImageCard = ({ image = Dummy5, latitude, longitude, onPress }) => {
   return (
-    // <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
         <View style={styles.moreContainer}>
@@ -20,7 +19,6 @@ const ImageCard = ({ image = Dummy5, latitude, longitude, onPress }) => {
         <Text style={styles.text}>Longitude: {longitude}</Text>
       </View>
     </View>
-    // </TouchableOpacity>
   )
 }
 
@@ -28,7 +26,6 @@ export default ImageCard
 
 const styles = StyleSheet.create({
   container: {
-    // width: Scale(270),
     backgroundColor: Colors.veryLightPink,
     borderRadius: 8,
     shadowColor: 'black',
@@ -36,13 +33,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 10,
     elevation: 14,
-    overflow: 'hidden',
-    // marginRight: 24
+    overflow: 'hidden'
   },
 
   image: {
-    width: Scale(300), //200
-    height: Scale(280), //140
+    width: Scale(300),
+    height: Scale(280),
     resizeMode: 'cover'
   },
   content: { padding: 12 },

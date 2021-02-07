@@ -1,5 +1,6 @@
 const initListPhoto = {
-  photos: []
+  photos: [],
+  lastImage: {}
 }
 
 export const listPhotoReducer = (state = initListPhoto, action) => {
@@ -7,6 +8,12 @@ export const listPhotoReducer = (state = initListPhoto, action) => {
     return {
       ...state,
       photos: action.value
+    }
+  }
+  if (action.type === 'SET_LAST_IMAGE') {
+    return {
+      ...state,
+      lastImage: action.value
     }
   }
   return state

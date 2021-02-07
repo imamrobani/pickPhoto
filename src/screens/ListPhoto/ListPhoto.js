@@ -1,16 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Header, ItemListImage } from '../../components'
-import { getListPhotos } from '../../redux/action/listPhoto'
 
 const ListPhoto = ({ navigation }) => {
-  const dispatch = useDispatch()
   const { photos } = useSelector(state => state.listPhotoReducer)
-
-  useEffect(() => {
-    dispatch(getListPhotos())
-  }, [])
 
   return (
     <View style={{ flex: 1 }}>
@@ -37,6 +31,4 @@ const ListPhoto = ({ navigation }) => {
 
 export default ListPhoto
 
-const styles = StyleSheet.create({
-
-})
+const styles = StyleSheet.create({})

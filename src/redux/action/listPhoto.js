@@ -9,6 +9,7 @@ export const getListPhotos = () => (dispatch) => {
       console.log('getListPhotos: ', res.data)
       dispatch(setLoading(false))
       dispatch({ type: 'SET_LIST_PHOTO', value: res.data.data })
+      dispatch({ type: 'SET_LAST_IMAGE', value: res.data.meta.last_image })
     })
     .catch(err => {
       dispatch(setLoading(false))
