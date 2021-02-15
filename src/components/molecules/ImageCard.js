@@ -26,12 +26,12 @@ export default ImageCard
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.veryLightPink,
+    backgroundColor: Colors.white,
     borderRadius: 8,
     shadowColor: 'black',
-    shadowOffset: { width: 0, height: 7 },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
     elevation: 14,
     overflow: 'hidden'
   },
