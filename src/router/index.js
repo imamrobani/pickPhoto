@@ -1,10 +1,12 @@
 import React from 'react'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Home, ListPhoto, Profile, SplashScreen } from '../screens'
+import { DetailPhoto, Home, ListPhoto, Profile, SplashScreen } from '../screens'
 import { BottomNavigator } from '../components'
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 
-const Stack = createStackNavigator()
+// const Stack = createStackNavigator()
+const Stack = createSharedElementStackNavigator()
 const Tab = createBottomTabNavigator()
 
 const options = {
@@ -39,6 +41,16 @@ const Router = () => {
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="MainApp" component={MainApp} options={optionsiOS} />
       <Stack.Screen name="ListPhoto" component={ListPhoto} options={options} />
+      <Stack.Screen
+        name="DetailPhoto"
+        component={DetailPhoto}
+        sharedElements={(route, otherRoute, showing) => {
+          const { image } = route.params
+          return [
+            { id: `item.${image}.image`, animation: 'fade-in' },
+          ]
+        }}
+      />
     </Stack.Navigator>
   )
 }
