@@ -45,9 +45,10 @@ const Router = () => {
         name="DetailPhoto"
         component={DetailPhoto}
         sharedElements={(route, otherRoute, showing) => {
-          const { image } = route.params
+          const { image, time } = route.params
           return [
-            { id: `item.${image}.image`, animation: 'fade-in' },
+            { id: `item.${image}.image`, animation: 'fade' },
+            { id: `item.${time}.time`, animation: 'fade' },
           ]
         }}
       />

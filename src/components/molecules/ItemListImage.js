@@ -1,5 +1,7 @@
+import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity, LayoutAnimation, NativeModules } from 'react-native'
+import { SharedElement } from 'react-navigation-shared-element'
 import { Dummy5 } from '../../assets'
 import { Colors, Fonts } from '../../const'
 import { Scale } from '../../utils'
@@ -12,6 +14,7 @@ const ItemListImage = ({ image = Dummy5, latitude, longitude, time }) => {
   const [width, setWidth] = useState(100)
   const [flexDirection, setFlexdirection] = useState('row')
   const [isExpand, setIsExpand] = useState(false)
+  const navigation = useNavigation()
 
   const onDetail = () => {
 
@@ -30,20 +33,26 @@ const ItemListImage = ({ image = Dummy5, latitude, longitude, time }) => {
   }
 
   return (
-    <TouchableOpacity activeOpacity={0.7} onPress={onDetail}>
-      <View style={[styles.container, { flexDirection }]}>
-        <Image
-          source={image}
-          style={[styles.image, { height, width }]}
-        />
-        <View style={styles.content}>
-          <Text style={styles.title}>Latittude: {latitude}</Text>
-          <Text style={styles.title}>Longitude: {longitude}</Text>
+    <View style={[styles.container, { flexDirection }]}>
+      <TouchableOpacity onPress={() => navigation.navigate('DetailPhoto', { image, time })}>
+        <SharedElement id={`item.${image}.image`}>
+          <Image
+            source={image}
+            style={[styles.image, { height, width }]}
+          />
+        </SharedElement>
+      </TouchableOpacity>
+      <View style={styles.content}>
+        <Text style={styles.title}>Latittude: {latitude}</Text>
+        <Text style={styles.title}>Longitude: {longitude}</Text>
+        <SharedElement id={`item.${image}.time`}>
           <Text style={styles.title}>Time: {time}</Text>
+        </SharedElement>
+        <TouchableOpacity activeOpacity={0.7} onPress={onDetail}>
           <View style={styles.line} />
-        </View>
+        </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </View>
   )
 }
 
