@@ -2,6 +2,9 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Fonts } from '../../const'
 import { IcBack } from '../../assets'
+import DeviceInfo from 'react-native-device-info'
+
+const isIphoneX = DeviceInfo.hasNotch()
 
 const Header = ({ title, subTitle, onBack }) => {
   return (
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     paddingHorizontal: 24,
-    paddingTop: 30,
+    paddingTop: isIphoneX ? 48 : 30,
     paddingBottom: 24,
     flexDirection: 'row',
     alignItems: 'center'

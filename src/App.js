@@ -7,7 +7,8 @@ import store from './redux/store';
 import { Loading } from './components';
 import FlashMessage from "react-native-flash-message"
 import { enableScreens } from 'react-native-screens'
-enableScreens()
+import { Platform } from 'react-native';
+Platform.OS !== 'ios' && enableScreens()
 
 const MainApp = () => {
   const { isLoading } = useSelector(state => state.globalReducer)
