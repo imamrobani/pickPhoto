@@ -21,7 +21,7 @@ const optionsiOS = {
 
 const MainApp = () => {
   return (
-    <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
+    <Tab.Navigator tabBar={(props) => <BottomNavigator {...props} />}>
       <Tab.Screen name='Home' component={Home} />
       <Tab.Screen name='Profile' component={Profile} />
     </Tab.Navigator>
@@ -33,22 +33,30 @@ const Router = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        // cardStyle: {
-        //   backgroundColor: 'white'
-        // }
-      }}
-    >
-      <Stack.Screen name="SplashScreen" component={SplashScreen} />
-      <Stack.Screen name="MainApp" component={MainApp} options={optionsiOS} />
-      <Stack.Screen name="ListPhoto" component={ListPhoto} options={options} />
+        gestureEnabled: false,
+        transitionSpec: {
+          open: { animation: 'timing', config: { duration: 400 } },
+          close: { animation: 'timing', config: { duration: 400 } }
+        },
+        cardStyleInterpolator: ({ current: { progress } }) => {
+          return {
+            cardStyle: {
+              opacity: progress
+            }
+          }
+        }
+      }}>
+      <Stack.Screen name='SplashScreen' component={SplashScreen} />
+      <Stack.Screen name='MainApp' component={MainApp} options={optionsiOS} />
+      <Stack.Screen name='ListPhoto' component={ListPhoto} />
       <Stack.Screen
-        name="DetailPhoto"
+        name='DetailPhoto'
         component={DetailPhoto}
         sharedElements={(route, otherRoute, showing) => {
           const { image, time } = route.params
           return [
-            { id: `item.${image}.image`, animation: 'fade' },
-            { id: `item.${time}.time`, animation: 'fade' },
+            { id: `item.${time}.image`, animation: 'fade' },
+            { id: `item.${time}.time`, animation: 'fade' }
           ]
         }}
       />

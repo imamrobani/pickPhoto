@@ -35,7 +35,7 @@ const ItemListImage = ({ image = Dummy5, latitude, longitude, time }) => {
   return (
     <View style={[styles.container, { flexDirection }]}>
       <TouchableOpacity onPress={() => navigation.navigate('DetailPhoto', { image, time })}>
-        <SharedElement id={`item.${image}.image`}>
+        <SharedElement id={`item.${time}.image`}>
           <Image
             source={image}
             style={[styles.image, { height, width }]}

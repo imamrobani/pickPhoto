@@ -1,8 +1,9 @@
 import React from 'react'
-import { Image, StyleSheet, Text, View, SafeAreaView, Dimensions, ScrollView } from 'react-native'
+import { Image, StyleSheet, Text, View, SafeAreaView, Dimensions, ScrollView, TouchableOpacity } from 'react-native'
 import { SharedElement } from 'react-navigation-shared-element'
 import { ButtonList } from '../../components'
 import * as Animatable from 'react-native-animatable'
+import { Fonts } from '../../const'
 const AnimatableScrollView = Animatable.createAnimatableComponent(ScrollView)
 
 const animation = {
@@ -27,11 +28,11 @@ const colors = [
 
 const buttons = ['Get more custom', 'More items']
 
-const DetailPhoto = ({ route }) => {
+const DetailPhoto = ({ route, navigation }) => {
   const { image, time } = route.params
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <SharedElement id={`item.${image}.image`}>
+      <SharedElement id={`item.${time}.image`}>
         <Image
           source={image}
           style={styles.image}
@@ -75,6 +76,13 @@ const DetailPhoto = ({ route }) => {
           )
         })}
       </View>
+      {/* <ButtonList text='Go back' onPress={() => navigation.goBack()} /> */}
+      <TouchableOpacity
+        style={styles.backContent}
+        onPress={() => navigation.goBack()}
+      >
+        <Text style={styles.back}>GO BACK</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   )
 }
@@ -108,5 +116,14 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 12,
     opacity: 0.7
+  },
+  backContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 32
+  },
+  back: {
+    fontSize: 16,
+    fontFamily: Fonts.POPPINS_MEDIUM
   }
 })
